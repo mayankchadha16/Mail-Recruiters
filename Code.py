@@ -10,6 +10,19 @@ from email import encoders
 
 import xlrd
 import os
+import PySimpleGUI as sg
+sg.theme('Dark Blue 3')  
+
+# GUI Layout
+layout = [
+    [sg.Text('Please enter your login credentials:', font='Default 14')],
+    [sg.T('Username:', size=(15,1)), sg.Input(key='-USER-')],
+    [sg.T('Password:', size=(15,1)), sg.Input(password_char='*', key='-PASSWORD-')],
+    [sg.Button('Send'), sg.Cancel()]
+]
+
+window = sg.Window('Send Email', layout)
+event, values = window.read()
 
 # Give the location of the file
 str1 = os.path.dirname(__file__)
@@ -31,7 +44,7 @@ count = 0
 for i in range(1, len(lst)):
 
     if(lst[i] != '' and count<=500):
-        fromaddr = "anshuliiitb16@gmail.com"
+        fromaddr = values['-USER-']
 
         toaddr = sheet.cell_value(i, 2)
 
@@ -79,8 +92,9 @@ for i in range(1, len(lst)):
         s.starttls()
 
         # Authentication
-        s.login(fromaddr, "anshuldon12")
-
+        s.login(fromaddr, values['-PASSWORD-'])
+        sg.popup_quick_message('Sending your message... this will take a moment...', background_color='red')
+        
         # Converts the Multipart msg into a string
         text = msg.as_string()
 
