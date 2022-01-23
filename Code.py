@@ -25,7 +25,7 @@ lst = []
 for i in range(sheet.nrows):
     lst.append(sheet.cell_value(i, 2))
 
-print(lst)
+#print(lst)
 
 count = 0
 for i in range(1, len(lst)):
