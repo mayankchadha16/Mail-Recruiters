@@ -1,5 +1,3 @@
-# Python code to illustrate Sending mail with attachments
-# from your Gmail account
 
 # libraries to be imported.....smtplib, xlrd
 import smtplib
